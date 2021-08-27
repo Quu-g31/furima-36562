@@ -1,24 +1,55 @@
-# README
+## users
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column             | Type   | Options     |
+|--------------------|--------|-------------|
+| nickname           | string | null: false |
+| e-mail             | string | null: false |
+| encrypted_password | string | null: false |
 
-Things you may want to cover:
+### Association
+- has_many :items
+- has_many :purchase_log
 
-* Ruby version
+## items
 
-* System dependencies
+| Column       | Type       | Options                        |
+|--------------|------------|--------------------------------|
+| item_name    | string     | null: false                    |
+| category     | string     | null: false                    |
+| item_status  | string     | null: false                    |
+| delivery_fee | string     | null: false                    |
+| send_region  | string     | null: false                    |
+| send_by_day  | integer    | null: false                    |
+| price        | integer    | null: false                    |
+| user_id      | references | null: false, foreign_key: true |
 
-* Configuration
+### Association
+- belongs_to :user
+- has_one    :purchase_log
 
-* Database creation
+## purchase_log
 
-* Database initialization
+| Column           | Type       | Options                        |
+|------------------|------------|--------------------------------|
+| credit_cade_code | integer    | null: false                    |
+| user_id          | references | null: false, foreign_key: true |
+| item_id          | references | null: false, foreign_key: true |
 
-* How to run the test suite
+### Association
+- belongs_to :user
+- belongs_to :items
+- has_one    :address
 
-* Services (job queues, cache servers, search engines, etc.)
+## address
 
-* Deployment instructions
+| Column         | Type    | Options     |
+|----------------|---------|-------------|
+| postal_code    | integer | null: false |
+| prefectures    | string  | null: false |
+| municipalities | string  | null: false |
+| address_code   | integer | null: false |
+| building_name  | string  |             |
+| phone_number   | integer | null: false |
 
-* ...
+### Association
+- belongs_to :purchase_log
