@@ -19,12 +19,12 @@
 
 | Column          | Type       | Options                        |
 |-----------------|------------|--------------------------------|
-| item_name       | string     | null: false                    |
-| item_describe   | text       | null: false
+| name            | string     | null: false                    |
+| describe        | text       | null: false
 | category_id     | integer    | null: false                    |
 | item_status_id  | integer    | null: false                    |
 | delivery_fee_id | integer    | null: false                    |
-| prefectures_id  | integer    | null: false                    |
+| prefecture_id   | integer    | null: false                    |
 | send_by_day_id  | integer    | null: false                    |
 | price           | integer    | null: false                    |
 | user            | references | null: false, foreign_key: true |
@@ -45,16 +45,16 @@
 - belongs_to :item
 - has_one    :address
 
-## address
+## addresses
 
 | Column         | Type       | Options                        |
 |----------------|------------|--------------------------------|
-| postal_code    | integer    | null: false                    |
-| prefectures_id | integer    | null: false                    |
+| postal_code    | string     | null: false                    |
+| prefecture_id  | integer    | null: false                    |
 | municipality   | string     | null: false                    |
 | address_code   | string     | null: false                    |
 | building_name  | string     |                                |
-| phone_number   | integer    | null: false                    |
+| phone_number   | string     | null: false                    |
 | purchase_log   | references | null: false, foreign_key: true |
 
 ### Association
