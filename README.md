@@ -5,13 +5,15 @@
 | nickname              | string | null: false               |
 | email                 | string | null: false, unique: true |
 | encrypted_password    | string | null: false               |
-| name_zenkaku          | string | null: false               |
-| name_kana_zenkaku     | string | null: false               |
+| first_name            | string | null: false               |
+| last_name             | string | null: false               |
+| first_name_kana       | string | null: false               |
+| last_name_kana        | string | null: false               |
 | birth_day             | date   | null: false               |
 
 ### Association
 - has_many :items
-- has_many :purchase_log
+- has_many :purchase_logs
 
 ## items
 
@@ -22,7 +24,7 @@
 | category_id     | integer    | null: false                    |
 | item_status_id  | integer    | null: false                    |
 | delivery_fee_id | integer    | null: false                    |
-| send_region_id  | integer    | null: false                    |
+| prefectures_id  | integer    | null: false                    |
 | send_by_day_id  | integer    | null: false                    |
 | price           | integer    | null: false                    |
 | user            | references | null: false, foreign_key: true |
@@ -45,14 +47,15 @@
 
 ## address
 
-| Column         | Type    | Options     |
-|----------------|---------|-------------|
-| postal_code    | integer | null: false |
-| prefectures    | string  | null: false |
-| municipality   | string  | null: false |
-| address_code   | integer | null: false |
-| building_name  | string  |             |
-| phone_number   | integer | null: false |
+| Column         | Type       | Options                        |
+|----------------|------------|--------------------------------|
+| postal_code    | integer    | null: false                    |
+| prefectures_id | integer    | null: false                    |
+| municipality   | string     | null: false                    |
+| address_code   | string     | null: false                    |
+| building_name  | string     |                                |
+| phone_number   | integer    | null: false                    |
+| purchase_log   | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :purchase_log
