@@ -1,10 +1,13 @@
 ## users
 
-| Column             | Type   | Options     |
-|--------------------|--------|-------------|
-| nickname           | string | null: false |
-| e-mail             | string | null: false |
-| encrypted_password | string | null: false |
+| Column                | Type   | Options                   |
+|-----------------------|--------|---------------------------|
+| nickname              | string | null: false               |
+| email                 | string | null: false, unique: true |
+| encrypted_password    | string | null: false               |
+| name_zenkaku          | string | null: false               |
+| name_kana_zenkaku     | string | null: false               |
+| birth_day             | date   | null: false               |
 
 ### Association
 - has_many :items
@@ -12,16 +15,17 @@
 
 ## items
 
-| Column       | Type       | Options                        |
-|--------------|------------|--------------------------------|
-| item_name    | string     | null: false                    |
-| category     | string     | null: false                    |
-| item_status  | string     | null: false                    |
-| delivery_fee | string     | null: false                    |
-| send_region  | string     | null: false                    |
-| send_by_day  | integer    | null: false                    |
-| price        | integer    | null: false                    |
-| user_id      | references | null: false, foreign_key: true |
+| Column          | Type       | Options                        |
+|-----------------|------------|--------------------------------|
+| item_name       | string     | null: false                    |
+| item_describe   | text       | null: false
+| category_id     | integer    | null: false                    |
+| item_status_id  | integer    | null: false                    |
+| delivery_fee_id | integer    | null: false                    |
+| send_region_id  | integer    | null: false                    |
+| send_by_day_id  | integer    | null: false                    |
+| price           | integer    | null: false                    |
+| user            | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -31,13 +35,12 @@
 
 | Column           | Type       | Options                        |
 |------------------|------------|--------------------------------|
-| credit_cade_code | integer    | null: false                    |
-| user_id          | references | null: false, foreign_key: true |
-| item_id          | references | null: false, foreign_key: true |
+| user             | references | null: false, foreign_key: true |
+| item             | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
-- belongs_to :items
+- belongs_to :item
 - has_one    :address
 
 ## address
@@ -46,7 +49,7 @@
 |----------------|---------|-------------|
 | postal_code    | integer | null: false |
 | prefectures    | string  | null: false |
-| municipalities | string  | null: false |
+| municipality   | string  | null: false |
 | address_code   | integer | null: false |
 | building_name  | string  |             |
 | phone_number   | integer | null: false |
