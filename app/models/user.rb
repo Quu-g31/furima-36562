@@ -13,8 +13,10 @@ class User < ApplicationRecord
   with_options presence: true, format: { with: /\A[ぁ-ゔァ-ヴ\p{Ideographic}ａ-ｚＡ-Ｚ０-９]+\z/ } do
     validates :last_name
     validates :first_name
-    validates :last_name_kana
-    validates :first_name_kana
+    with_options format: {with: /\A[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+\z/ } do
+      validates :last_name_kana
+      validates :first_name_kana
+    end
   end
   validates :birth_day, presence: true
 end
