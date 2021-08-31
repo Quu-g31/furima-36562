@@ -8,13 +8,15 @@ class User < ApplicationRecord
 
   validates :nickname, presence: true
   validates :password, format: { with: VALID_PASSWORD_REGEX}
-  with_options presence: true, format: { with: /\A[ぁ-ゔァ-ヴ\p{Ideographic}ａ-ｚＡ-Ｚ]+\z/ } do
-    validates :last_name
-    validates :first_name
-  end
-  with_options presence: true, format: {with: /\A[\p{katakana} ー－&&[^ -~｡-ﾟ]]+\z/ } do
-    validates :last_name_kana
-    validates :first_name_kana
+  with_options presence: true do
+    with_options format: { with: /\A[ぁ-ゔァ-ヴ\p{Ideographic}]+\z/ } do
+      validates :last_name
+      validates :first_name
+    end
+    with_options format: {with: /\A[\p{katakana} ー－&&[^ -~｡-ﾟ]]+\z/ } do
+      validates :last_name_kana
+      validates :first_name_kana
+    end
   end
   validates :birth_day, presence: true
 end
