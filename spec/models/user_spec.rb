@@ -11,6 +11,9 @@ RSpec.describe User do
         expect(@user).to be_valid
       end
       it "passwordが6文字以上であれば登録できる" do
+        @user.password = 'aaa111'
+        @user.password_confirmation = 'aaa111'
+        expect(@user).to be_valid
       end
       it "passwordとpassword_confirmationが半角英数字を含めば登録できる" do
         @user.password = 'aaa111'
@@ -51,6 +54,11 @@ RSpec.describe User do
         another_user = FactoryBot.build(:user, email: @user.email)
         another_user.valid?
         expect(another_user.errors.full_messages).to include('Email has already been taken')
+      end
+      it "emailに@を含まなければ登録できない" do
+        @user.email = 'mac.co.jp'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
       end
       it "passwordが空では登録できない" do
         @user.password = ''
