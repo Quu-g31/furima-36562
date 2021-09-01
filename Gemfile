@@ -64,3 +64,7 @@ gem 'pry-rails'
 gem 'gimei'
 
 gem 'active_hash'
+
+gem 'mini_magick'
+
+gem 'image_processing', '~> 1.2'
