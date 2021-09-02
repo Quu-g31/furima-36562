@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :describe
-    validates :price, format: { with:/\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i }
+    validates :price, numericality: true, format: { with: /\A[0-9]+\z/ }
   end
   with_options numericality: { other_than: 1, message: "can't be blank"} do
     validates :category_id
