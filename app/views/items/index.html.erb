@@ -128,7 +128,7 @@
     </div>
     <ul class='item-lists'>
 
-  <% unless @item.present? %>
+  <% if @items.present? %>
     <% @items.each do |item| %>
       <li class='list'>
         <%= link_to "#" do %>
