@@ -5,10 +5,6 @@ class ItemsController < ApplicationController
     @items = Item.includes(:user).order('created_at DESC')
   end
 
-  def delivery_fee
-    @item = Item.find_by(delivery_fee_id: params[:id])
-  end
-
   def new
     @item = Item.new
   end

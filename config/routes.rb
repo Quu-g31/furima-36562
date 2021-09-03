@@ -4,5 +4,4 @@ Rails.application.routes.draw do
 
   resources :items, only: [:new, :create]
 
-  get '/items/delivery_fee/:id', to: "items#delivery_fee"
 end
