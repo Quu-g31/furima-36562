@@ -51,10 +51,25 @@ RSpec.describe PurchaseLogAddress, type: :model do
         @purchase_log.valid?
         expect(@purchase_log.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone_numberが半角数字以外の場合' do
+      it 'phone_numberが9桁以下では購入できない' do
+        @purchase_log.phone_number = '09000000'
+        @purchase_log.valid?
+        expect(@purchase_log.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'phone_numberが12桁以上では購入できない' do
+        @purchase_log.phone_number = '090000000000'
+        @purchase_log.valid?
+        expect(@purchase_log.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'phone_numberに半角数字以外が含まれている場合は購入できない' do
         @purchase_log.phone_number = '１２３４５６７８９１０'
         @purchase_log.valid?
-        expect(@purchase_log.errors.full_messages).to include("Phone number is invalid", "Phone number Is not include hyphen(-)")
+        expect(@purchase_log.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'phone_numberにハイフン(-)が含まれている場合は購入できない' do
+        @purchase_log.phone_number = '090-1234-5678'
+        @purchase_log.valid?
+        expect(@purchase_log.errors.full_messages).to include("Phone number is not include hyphen(-)")
       end
       it 'tokenが空の場合' do
         @purchase_log.token = ''
