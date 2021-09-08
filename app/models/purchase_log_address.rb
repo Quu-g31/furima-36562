@@ -8,7 +8,7 @@ class PurchaseLogAddress
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :municipality
     validates :address_code
-    validates :phone_number, format: { with: /\A[0-9]+\z/ }, numericality: {only_integer: true, message: "is invalid. Not include hyphen(-)"}
+    validates :phone_number, format: { with: /\A[0-9]+\z/ }, numericality: {only_integer: true, message: "Is not include hyphen(-)"}
     validates :token
   end
   validates :prefecture_id, numericality: {other_than: 1, message: "can't be blank"} 
