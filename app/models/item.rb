@@ -6,8 +6,9 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :send_by_day
 
-  belongs_to :user
+  belongs_to       :user
   has_one_attached :image
+  has_one          :purchase_log
 
   with_options presence: true do
     validates :image
