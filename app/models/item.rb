@@ -17,7 +17,7 @@ class Item < ApplicationRecord
     validates :price, format: { with: /\A[0-9]+\z/ },
                       numericality: { only_integer: true, greater_than: 299, less_than: 10_000_000 }
   end
-  with_options numericality: { other_than: 1, message: "can't be blank" } do
+  with_options numericality: { other_than: 1, message: "が未選択です" } do
     validates :category_id
     validates :item_status_id
     validates :delivery_fee_id
